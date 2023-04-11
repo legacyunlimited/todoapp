@@ -1,0 +1,32 @@
+###
+
+GET http://localhost:3000/person
+
+###
+
+POST http://localhost:3000/person
+Content-Type: application/json
+
+{
+    "name": "bart simpson",
+    "email": "homerson@aol.com"
+}
+
+###
+
+PUT http://localhost:3000/person
+Content-Type: application/json
+
+{
+    "name": "lisa simpson",
+    "email": "bartsister@aol.com"
+}
+
+###
+
+DELETE http://localhost:3000/person
+Content-Type: application/json
+
+{
+    "id": 2
+}
