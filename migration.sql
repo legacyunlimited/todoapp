@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS person;
 
 CREATE TABLE person (
     id serial PRIMARY KEY,
-    name VARCHAR(355),
+    firstname VARCHAR(355),
+    lastname VARCHAR(355),
     email VARCHAR(50)
 );
 

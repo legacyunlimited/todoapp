@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(express.json());
-
+app.use(express.static("client"));
 app.use(cors());
 
 const { Pool } = require("pg");
@@ -13,13 +13,21 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 pool.connect();
 
-app.get("/person", (req, res) => {
-  pool.query("SELECT * FROM person").then((result) => {
+app.get("/api/todo", (req, res) => {
+  pool.query("SELECT * FROM todo").then((result) => {
     res.send(result.rows);
   });
 });
 
-app.post("/person", (req, res) => {
+app.get("/api/todo/:person_id", (req, res) => {
+  pool
+    .query(`SELECT * FROM todo where person_id =${req.params.person_id} `)
+    .then((result) => {
+      res.send(result.rows);
+    });
+});
+
+app.post("/api/person", (req, res) => {
   let person = req.body;
   console.log(person);
   let insertQuery = `insert into person(email, name) 
@@ -35,12 +43,11 @@ app.post("/person", (req, res) => {
   pool.end;
 });
 
-app.put("/person", (req, res) => {
-  let person = req.body;
-  console.log(person);
-  let updateQuery = `update person
-                       set name = '${person.name}',
-                           email = '${person.email}'`;
+app.put("/api/todo/:id", (req, res) => {
+  let todo = req.body;
+  console.log(todo);
+  let updateQuery = `update todo SET 
+                           task = '${todo.task}' where id = ${req.params.id}`;
 
   pool.query(updateQuery, (err, result) => {
     if (!err) {
@@ -52,9 +59,8 @@ app.put("/person", (req, res) => {
   pool.end;
 });
 
-app.delete("/person", (req, res) => {
-  let insertQuery = `delete from person where id=${req.body.id}`;
-  console.log(req.body);
+app.delete("/api/todo/:id", (req, res) => {
+  let insertQuery = `delete from todo where id=${req.params.id}`;
   pool.query(insertQuery, (err, result) => {
     if (!err) {
       res.send("Deletion was successful");
