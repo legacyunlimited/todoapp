@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+}
+
+.person-list,
+.todo-list {
+  width: 50%;
+}
+
+.person-list ul,
+.todo-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+
+.todo-list li button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-top: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container select {
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.form-container input[type="submit"] {
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}

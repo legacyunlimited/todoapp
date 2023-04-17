@@ -19,6 +19,12 @@ app.get("/api/todo", (req, res) => {
   });
 });
 
+app.get("/api/person", (req, res) => {
+  pool.query("SELECT * FROM person").then((result) => {
+    res.send(result.rows);
+  });
+});
+
 app.get("/api/todo/:person_id", (req, res) => {
   pool
     .query(`SELECT * FROM todo where person_id =${req.params.person_id} `)
@@ -30,8 +36,8 @@ app.get("/api/todo/:person_id", (req, res) => {
 app.post("/api/person", (req, res) => {
   let person = req.body;
   console.log(person);
-  let insertQuery = `insert into person(email, name) 
-                     values('${person.email}', '${person.name}')`;
+  let insertQuery = `insert into person(email, firstname, lastname) 
+                     values('${person.email}', '${person.firstname}','${person.lastname}')`;
 
   pool.query(insertQuery, (err, result) => {
     if (!err) {
@@ -41,6 +47,40 @@ app.post("/api/person", (req, res) => {
     }
   });
   pool.end;
+});
+
+app.post("/api/todo", (req, res) => {
+  const { task, deadline, personId } = req.body;
+  console.log(task, deadline, personId);
+  pool.query(
+    `INSERT INTO todo (task, deadline, person_id)
+    VALUES ($1, $2, $3)`,
+    [task, deadline, personId],
+    (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error adding todo");
+      } else {
+        res.status(201).send("Todo added successfully");
+      }
+    }
+  );
+});
+app.patch("/api/todo/:id", (req, res) => {
+  // const todo = todo.find((todo) => todo.id == req.params.id);
+  // console.log(todo);
+  pool.query(
+    "UPDATE todo SET deadline = $1 WHERE id = $2",
+    ["2023-04-14", req.params.id],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+      } else {
+        res.json(result);
+      }
+    }
+  );
 });
 
 app.put("/api/todo/:id", (req, res) => {

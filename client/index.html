@@ -4,15 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="index.js"></script>
-    <title>Document</title>
+    <script defer src="index.js"></script>
+    <title>Todo App</title>
   </head>
   <body>
-    <div class="container"></div>
-
-    <!-- <form>
-      <input type="text" id="search" />
-      <button id="searchbutton">search</button>
-    </form> -->
+    <div class="container">
+      <div class="person-list"></div>
+      <h2>People</h2>
+      <ul id="people"></ul>
+      <div class="todo-list">
+        <h2>Todos</h2>
+        <ul id="todos"></ul>
+      </div>
+    </div>
+    <div class="form-container">
+      <h2>Add Todo</h2>
+      <form id="add-todo-form">
+        <label for="task">Task:</label>
+        <input type="text" id="task" name="task" required="" />
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" name="deadline" required="" />
+        <label for="person">Person:</label>
+        <input type="text"id="person" name="person" required=""></input>
+        <input type="submit" value="Add Todo" />
+      </form>
+      <script src="script.js"></script>
+    </div>
   </body>
 </html>

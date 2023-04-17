@@ -1,18 +1,35 @@
 ###
+
 GET http://localhost:3000/api/todo
 
 ###
+
 GET http://localhost:3000/api/todo/1
+
+###
+GET http://localhost:3000/api/person
+
+###
+GET http://localhost:3000/api/1
 
 ###
 POST http://localhost:3000/api/person
 Content-Type: application/json
 
 {
-    "name": "bart simpson",
-    "email": "homerson@aol.com"
+    "firstname": "lisa",
+    "lastname": "simpson",
+    "email": "homerdaughter@aol.com"
 }
 
+###
+POST http://localhost:3000/api/todo
+Content-Type: application/json
+{
+    "task": "study",
+    "deadline": "05/01/2023",
+    "personId": 4 
+}
 
 
 ###
@@ -24,5 +41,8 @@ Content-Type: application/json
 }
 
 ###
+PATCH http://localhost:3000/api/todo/3
 
-DELETE http://localhost:3000/api/todo/6
+
+###
+DELETE http://localhost:3000/api/todo/5
